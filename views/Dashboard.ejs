@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <!-- UIkit CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.16.22/dist/css/uikit.min.css" />
+    <!-- UIkit JS -->
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.16.22/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.16.22/dist/js/uikit-icons.min.js"></script>
+</head>
+<body>
+    <div class="uk-container uk-container-xsmall">
+        <div class="uk-card uk-card-default uk-card-body uk-width-1-1@m uk-margin-top">
+            <h3>Selamat Datang! <%= user[0].name %></h3>
+            <p>Salin Token <a href="#" class="uk-icon-link" onclick="copying()" uk-icon="copy"></a></p>
+            <p id="token" style="display: none;"><%= auth.token %></p>
+        </div>
+
+        <a href="#modal-upload" uk-toggle="target: #modal-upload" class="uk-icon-link uk-margin uk-margin-small-right uk-text-emphasis" uk-icon="upload"></a>
+        <div id="modal-upload" class="uk-flex-top" uk-modal>
+            <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+                <button class="uk-modal-close-default" type="button" uk-close></button>
+                <form action="/import" method="post" enctype="multipart/form-data">
+                    <label for="nilai">Upload File XLSX</label>
+                    <input type="file" name="nilai" id="nilai" accept=".xlsx, .xls">
+                    <button type="submit" class="uk-button uk-button-primary uk-button-small uk-width-1-1 uk-margin">UPLOAD</button>
+                </form>
+            </div>
+        </div>
+
+        <table class="uk-table uk-table-striped uk-margin-remove-top">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>NIM</th>
+                    <th>Nama</th>
+                    <th>UTS</th>
+                    <th>UAS</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% nilai.forEach(element => { %>
+                    <tr>
+                        <td><%= increments++ %></td>
+                        <td><%= element.nim %></td>
+                        <td><%= element.nama %></td>
+                        <td><%= element.uts %></td>
+                        <td><%= element.uas %></td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+    <script>
+        const copying = () => {
+            const token = document.getElementById('token').innerText
+            navigator.clipboard.writeText(token)
+            UIkit.notification({
+                message: 'Token Berhasil Disalin!',
+                status: 'success',
+                pos: 'top-center',
+                timeout: 2000
+            });
+        }
+    </script>
+</body>
+</html>

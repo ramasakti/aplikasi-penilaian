@@ -4,8 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <!-- UIkit CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.16.22/dist/css/uikit.min.css" />
+    <!-- UIkit JS -->
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.16.22/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.16.22/dist/js/uikit-icons.min.js"></script>
 </head>
 <body>
+    <div class="uk-container uk-container-xsmall">
+        <form action="/authenticate" method="POST">
+            <div class="uk-card uk-card-default uk-card-body uk-width-1-1@m uk-margin-xlarge-top">
+                <fieldset class="uk-fieldset">
+                    <legend class="uk-legend uk-text-center">Login</legend>
+            
+                    <div class="uk-margin">
+                        <label for="Username">Username</label>
+                        <input class="uk-input" name="username" type="text" placeholder="Username" aria-label="Username">
+                    </div>
+                    <div class="uk-margin">
+                        <label for="Password">Password</label>
+                        <input class="uk-input" name="password" type="password" placeholder="Password" aria-label="Password">
+                    </div>
     
+                    <button class="uk-button uk-button-primary uk-button-small uk-width-1-1" type="submit">Login</button>
+                </fieldset>
+            </div>
+        </form>
+    </div>
 </body>
 </html>
